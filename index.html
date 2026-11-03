@@ -192,6 +192,12 @@
     display: flex; align-items: center; justify-content: center;
   }
   .hero-video .vid-mute svg { width: 18px; height: 18px; }
+  .hero-video .vid-fullscreen {
+    position: absolute; bottom: 12px; right: 56px; width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(10,8,4,0.65); border: none; color: #fff; cursor: pointer; padding: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-video .vid-fullscreen svg { width: 18px; height: 18px; }
 
   /* ---------- sections ---------- */
   section { padding: clamp(18px, 2.5vw, 30px) 0; border-top: 1px solid var(--line); }
@@ -413,6 +419,9 @@
             </video>
             <button type="button" class="vid-mute" id="intro-vid-mute" aria-label="Unmute video" aria-pressed="false">
               <svg id="intro-vid-mute-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 9 3 15 8 15 13 20 13 4 8 9 3 9" fill="currentColor" stroke="none"></polygon><line x1="16" y1="9" x2="22" y2="15"></line><line x1="22" y1="9" x2="16" y2="15"></line></svg>
+            </button>
+            <button type="button" class="vid-fullscreen" id="intro-vid-fullscreen" aria-label="View video fullscreen">
+              <svg id="intro-vid-fullscreen-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"></path><path d="M21 8V5a2 2 0 0 0-2-2h-3"></path><path d="M3 16v3a2 2 0 0 0 2 2h3"></path><path d="M16 21h3a2 2 0 0 0 2-2v-3"></path></svg>
             </button>
           </div>
         </div>
@@ -755,6 +764,37 @@
       vid.muted = !vid.muted;
       sync();
     });
+    sync();
+  })();
+
+  (function () {
+    var vid = document.getElementById('intro-vid');
+    var btn = document.getElementById('intro-vid-fullscreen');
+    var icon = document.getElementById('intro-vid-fullscreen-icon');
+    if (!vid || !btn || !icon) return;
+    var expandIcon = '<path d="M8 3H5a2 2 0 0 0-2 2v3"></path><path d="M21 8V5a2 2 0 0 0-2-2h-3"></path><path d="M3 16v3a2 2 0 0 0 2 2h3"></path><path d="M16 21h3a2 2 0 0 0 2-2v-3"></path>';
+    var shrinkIcon = '<path d="M8 3v3a2 2 0 0 1-2 2H3"></path><path d="M21 8h-3a2 2 0 0 1-2-2V3"></path><path d="M3 16h3a2 2 0 0 1 2 2v3"></path><path d="M16 21v-3a2 2 0 0 1 2-2h3"></path>';
+    function isFs() {
+      return document.fullscreenElement === vid || document.webkitFullscreenElement === vid;
+    }
+    function sync() {
+      icon.innerHTML = isFs() ? shrinkIcon : expandIcon;
+      btn.setAttribute('aria-label', isFs() ? 'Exit fullscreen' : 'View video fullscreen');
+    }
+    btn.addEventListener('click', function () {
+      if (isFs()) {
+        if (document.exitFullscreen) document.exitFullscreen();
+        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+      } else if (vid.requestFullscreen) {
+        vid.requestFullscreen();
+      } else if (vid.webkitRequestFullscreen) {
+        vid.webkitRequestFullscreen();
+      } else if (vid.webkitEnterFullscreen) {
+        vid.webkitEnterFullscreen();
+      }
+    });
+    document.addEventListener('fullscreenchange', sync);
+    document.addEventListener('webkitfullscreenchange', sync);
     sync();
   })();
 
