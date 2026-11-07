@@ -314,9 +314,41 @@
     font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; color: var(--ink-soft);
     margin: 10px 0 0; text-align: center;
   }
-  .software-note { font-size: 0.85rem; color: var(--ink-soft); margin: 18px 0 10px; font-style: italic; }
-  .software-quotes { display: grid; gap: 12px; }
-  .software-quotes .rec-quote { margin: 0 !important; }
+  .software-note {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.05em; text-transform: uppercase;
+    font-weight: 700; color: var(--on-accent); background: var(--accent);
+    padding: 7px 14px; border-radius: 999px; margin: 20px 0 14px; font-style: normal;
+    box-shadow: 0 2px 8px rgba(20,16,10,0.18);
+  }
+  .software-quotes { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 18px; }
+  .quote-card {
+    position: relative; border-radius: 16px; padding: 30px 18px 18px; border: 1px solid var(--line);
+    box-shadow: var(--shadow); transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .quote-card:hover { transform: translateY(-5px) scale(1.015); box-shadow: 0 10px 28px rgba(20,16,10,0.2); }
+  .quote-mark {
+    position: absolute; top: -16px; left: 18px; width: 38px; height: 38px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fraunces', serif; font-size: 1.6rem; font-weight: 700; line-height: 1; box-shadow: var(--shadow);
+  }
+  .quote-text {
+    font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; color: var(--ink);
+    font-size: 1.08rem; line-height: 1.48; margin: 6px 0 14px;
+  }
+  .quote-attr {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.04em; text-transform: uppercase;
+    font-weight: 700; margin: 0; display: flex; align-items: center; gap: 5px;
+  }
+  .quote-card:nth-child(3n+1) { background: var(--gold-soft); }
+  .quote-card:nth-child(3n+1) .quote-mark { background: var(--gold); color: var(--on-gold); }
+  .quote-card:nth-child(3n+1) .quote-attr { color: var(--gold-ink); }
+  .quote-card:nth-child(3n+2) { background: var(--pop-soft); }
+  .quote-card:nth-child(3n+2) .quote-mark { background: var(--pop); color: #fff; }
+  .quote-card:nth-child(3n+2) .quote-attr { color: var(--pop); }
+  .quote-card:nth-child(3n+3) { background: var(--surface-alt); }
+  .quote-card:nth-child(3n+3) .quote-mark { background: var(--accent); color: var(--on-accent); }
+  .quote-card:nth-child(3n+3) .quote-attr { color: var(--accent); }
 
   /* speaking */
   .speaking-layout { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 20px; }
@@ -651,9 +683,21 @@
           <p class="software-caption">Introduction to Computing &mdash; AI-assisted courseware site</p>
           <p class="software-note">The quotes below are real, unedited comments from student course evaluations.</p>
           <div class="software-quotes">
-            <p class="rec-quote">&quot;I really enjoyed the assignments that the professor created. they were all very interactive and had so many resources within each one to help guide us and help us understand the reason behind each action.&quot;</p>
-            <p class="rec-quote">&quot;Our first assignment helped me with build an ai to help me study for other classes.&quot;</p>
-            <p class="rec-quote">&quot;The courseware site that was used was absolutely amazing.&quot;</p>
+            <div class="quote-card">
+              <span class="quote-mark">&ldquo;</span>
+              <p class="quote-text">&quot;I really enjoyed the assignments that the professor created. they were all very interactive and had so many resources within each one to help guide us and help us understand the reason behind each action.&quot;</p>
+              <p class="quote-attr">&#10003; Verified Student Course Evaluation</p>
+            </div>
+            <div class="quote-card">
+              <span class="quote-mark">&ldquo;</span>
+              <p class="quote-text">&quot;Our first assignment helped me with build an ai to help me study for other classes.&quot;</p>
+              <p class="quote-attr">&#10003; Verified Student Course Evaluation</p>
+            </div>
+            <div class="quote-card">
+              <span class="quote-mark">&ldquo;</span>
+              <p class="quote-text">&quot;The courseware site that was used was absolutely amazing.&quot;</p>
+              <p class="quote-attr">&#10003; Verified Student Course Evaluation</p>
+            </div>
           </div>
         </div>
         <div class="software-card">
@@ -661,9 +705,21 @@
           <p class="software-caption">The Excel Flight Deck &mdash; Dr. T&rsquo;s Excel Mastery Training Program</p>
           <p class="software-note">The quotes below are real, unedited comments from student course evaluations.</p>
           <div class="software-quotes">
-            <p class="rec-quote">&quot;The flight simulator contributed most to my learning.&quot;</p>
-            <p class="rec-quote">&quot;I really enjoyed the assignments that the professor created. they were all very interactive and had so many resources within each one to help guide us and help us understand the reason behind each action.&quot;</p>
-            <p class="rec-quote">&quot;The site created for practicing the Excel formulas was the most helpful as it provided multiple resources to ensure I learned and got the answer correct at the same time.&quot;</p>
+            <div class="quote-card">
+              <span class="quote-mark">&ldquo;</span>
+              <p class="quote-text">&quot;The flight simulator contributed most to my learning.&quot;</p>
+              <p class="quote-attr">&#10003; Verified Student Course Evaluation</p>
+            </div>
+            <div class="quote-card">
+              <span class="quote-mark">&ldquo;</span>
+              <p class="quote-text">&quot;I really enjoyed the assignments that the professor created. they were all very interactive and had so many resources within each one to help guide us and help us understand the reason behind each action.&quot;</p>
+              <p class="quote-attr">&#10003; Verified Student Course Evaluation</p>
+            </div>
+            <div class="quote-card">
+              <span class="quote-mark">&ldquo;</span>
+              <p class="quote-text">&quot;The site created for practicing the Excel formulas was the most helpful as it provided multiple resources to ensure I learned and got the answer correct at the same time.&quot;</p>
+              <p class="quote-attr">&#10003; Verified Student Course Evaluation</p>
+            </div>
           </div>
         </div>
       </div>
